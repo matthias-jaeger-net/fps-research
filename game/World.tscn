@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Material.material" type="Material" id=2]
 [ext_resource path="res://level1.dae" type="PackedScene" id=3]
+[ext_resource path="res://level2.dae" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.7
@@ -46,4 +47,8 @@ depth = 200.0
 material = ExtResource( 2 )
 
 [node name="level1" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.165562, -10.2163, 4.01761 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.165562, -11.7047, 4.01761 )
+visible = false
+
+[node name="level2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.0198, 0 )
