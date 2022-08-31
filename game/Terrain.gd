@@ -1,25 +1,36 @@
 extends MeshInstance
 
-onready var colision_shape = $StaticBody/CollisionShape 
-onready var chunk_size = 10.0
-onready var height_ratio = 1.0 
-onready var size_ratio = 1.0
+const HEIGHT_SCALER: int = 1
+const IMAGE_SCALER: int = 1
 
+onready var collision_shape = $StaticBody/CollisionShape
+onready	var height_map_shape = HeightMapShape.new()
+onready	var image_buffer = Image.new()
 
 func _ready() -> void:
-	var img = Image.new()
-	var shape = HeightMapShape.new()
-	var spb = StreamPeerBuffer.new()
-	colision_shape.shape = shape
-	set("shader_param/height_map_ratio", height_ratio)
-	img.load("res://heightmap.exr")
-	img.convert(Image.FORMAT_RF)
-	img.resize(img.get_width() * size_ratio, img.get_height() * size_ratio)
-	var data = img.get_data()
+	# Load heightmap image is hacky
+	image_buffer.load("res://heightmap.exr")
 	
-	for i in range(0, data.size()):
-		data[i] *= height_ratio
-		
-	shape.map_width = img.get_width()
-	shape.map_depth = img.get_height()
-	#shape.map_data = new PoolRealArray(data)
+	# why?
+	image_buffer.convert(Image.FORMAT_RF)
+
+	# Get values from loaded image
+	var height_data: PoolByteArray = image_buffer.get_data()
+	var image_width: int = image_buffer.get_width()
+	var image_height: int = image_buffer.get_height()
+
+	# Make sure the image has the same grid/dimensions
+	image_buffer.resize(image_width * IMAGE_SCALER, image_height * IMAGE_SCALER)
+
+	# Scale height data to same value as the shader produces
+	for index in range(0, height_data.size()):
+		height_data[index] *= HEIGHT_SCALER
+
+	# Set up the height map with the scaled data
+	height_map_shape.set_map_width(image_width * IMAGE_SCALER)
+	height_map_shape.set_map_depth(image_height * IMAGE_SCALER)
+	height_map_shape.set_map_data(height_data)
+
+	# Use the shape for the collisions
+	collision_shape.set_shape(height_map_shape)
+	
