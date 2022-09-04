@@ -5,11 +5,11 @@ const MOUSE_SENS_Y := -0.01
 const MIN_CAM_ANGLE = -85
 const MAX_CAM_ANGLE = 85
 
-const MAX_SPEED = 12
-const MAX_SPEED_SPRINT = 26
-const ACCELERATION = 6
+const MAX_SPEED = 8
+const MAX_SPEED_SPRINT = 12
+const ACCELERATION = 4
 const DECCELERATION = 8
-const JUMP_SPEED = 20
+const JUMP_SPEED = 10
 
 onready var head: Spatial = $Head
 

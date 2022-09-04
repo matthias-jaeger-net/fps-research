@@ -1,36 +1,46 @@
+# Terrain from a heightmap with collision
 extends MeshInstance
 
-const HEIGHT_SCALER: int = 1
-const IMAGE_SCALER: int = 1
-
+## VARIABLES
 onready var collision_shape = $StaticBody/CollisionShape
-onready	var height_map_shape = HeightMapShape.new()
-onready	var image_buffer = Image.new()
+export var shape_scaler = 1
+export var image_scaler = 0.25
+export var height_scaler = 1
+
+# Brute force converts PoolByteArray to PoolRealArray
+func convert2(data: PoolByteArray) -> PoolRealArray:
+	var arr = PoolRealArray()
+	for index in range(0, data.size()):
+		arr.append(float(data[index]))
+	return arr
+
+
+# Creates a image and loads heightmap in it
+func create_image_buffer(url: String) -> Image:
+	var img: Image = Image.new()
+	img.load(url)
+	img.convert(Image.FORMAT_RF)
+	return img
+
+
+# Creates a heightmap shape from the data of an image
+func create_heightmap_shape(img: Image) -> HeightMapShape:
+	var map_data: PoolByteArray = img.get_data()
+	var map_width: int = img.get_width() * image_scaler
+	var map_depth: int = img.get_height() * image_scaler
+	var shape: HeightMapShape = HeightMapShape.new()
+
+	for index in range(0, map_data.size()):
+		map_data[index] *= height_scaler
+
+	shape.set_map_width(map_width)
+	shape.set_map_depth(map_depth)
+	shape.set_map_data(convert2(map_data))
+
+	return shape
+
 
 func _ready() -> void:
-	# Load heightmap image is hacky
-	image_buffer.load("res://heightmap.exr")
-	
-	# why?
-	image_buffer.convert(Image.FORMAT_RF)
-
-	# Get values from loaded image
-	var height_data: PoolByteArray = image_buffer.get_data()
-	var image_width: int = image_buffer.get_width()
-	var image_height: int = image_buffer.get_height()
-
-	# Make sure the image has the same grid/dimensions
-	image_buffer.resize(image_width * IMAGE_SCALER, image_height * IMAGE_SCALER)
-
-	# Scale height data to same value as the shader produces
-	for index in range(0, height_data.size()):
-		height_data[index] *= HEIGHT_SCALER
-
-	# Set up the height map with the scaled data
-	height_map_shape.set_map_width(image_width * IMAGE_SCALER)
-	height_map_shape.set_map_depth(image_height * IMAGE_SCALER)
-	height_map_shape.set_map_data(height_data)
-
-	# Use the shape for the collisions
-	collision_shape.set_shape(height_map_shape)
-	
+	var img: Image = create_image_buffer("res://heightmap_resource.tres")
+	var shape: HeightMapShape = create_heightmap_shape(img)
+	collision_shape.set_shape(shape)
