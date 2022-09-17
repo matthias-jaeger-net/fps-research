@@ -16,7 +16,7 @@ extents = Vector3( 1, 1.9621, 0.44377 )
 [node name="Spatial" type="Spatial"]
 
 [node name="Player" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.84829 )
+transform = Transform( -0.999886, 0, 0.0150791, 0, 1, 0, -0.0150791, 0, -0.999886, -35.8433, 0, -26.0598 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
@@ -47,14 +47,12 @@ material = SubResource( 2 )
 
 [node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.7356, 5.16392, -11.2323 )
-visible = false
 width = 0.869579
 height = 8.67942
 depth = 31.4196
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58833 )
-visible = false
 operation = 2
 width = 3.50077
 height = 4.80199
@@ -62,14 +60,12 @@ depth = 8.78219
 
 [node name="CSGBox5" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.048, 4.9998, -5.43272 )
-visible = false
 width = 1.30652
 height = 8.67942
 depth = 62.1178
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27.4543 )
-visible = false
 operation = 2
 height = 6.62718
 depth = 5.47284
@@ -82,7 +78,6 @@ depth = 5.47284
 
 [node name="CSGBox6" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.32909, 10.7306, -0.497693 )
-visible = false
 width = 40.12
 height = 1.99825
 depth = 56.148
@@ -94,27 +89,23 @@ width = 19.6975
 
 [node name="CSGBox8" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4924, 27.6053, -1.43748 )
-visible = false
 width = 40.12
 height = 14.5873
 depth = 25.2824
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox8"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.21825, 0, 9.22619 )
-visible = false
 operation = 2
 width = 19.6975
 
 [node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.5784, 4.50191, 16.6548 )
-visible = false
 width = 4.19051
 height = 8.67942
 depth = 38.2523
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.34467, 0.0432196, -7.66653 )
-visible = false
 width = 9.88251
 height = 0.860699
 depth = 14.6747
@@ -127,28 +118,24 @@ depth = 14.6747
 
 [node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( -0.914134, 0, 0.405413, 0, 1, 0, -0.405413, 0, -0.914134, -25.2146, 4.9998, 4.36464 )
-visible = false
 width = 1.30652
 height = 8.67942
 depth = 31.4196
 
 [node name="CSGBox9" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( -0.914134, 0, 0.405413, 0, 1, 0, -0.405413, 0, -0.914134, -0.946465, 4.9998, -11.1835 )
-visible = false
 width = 1.30652
 height = 8.67942
 depth = 31.4196
 
 [node name="CSGBox7" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 0.407263, 0, 0.913311, 0, 1, 0, -0.913311, 0, 0.407263, 14.7711, 15.7557, -5.09193 )
-visible = false
 width = 24.4277
 height = 8.67942
 depth = 31.4196
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox7"]
 transform = Transform( 1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, -5.26174, -2.42831, -6.53315 )
-visible = false
 operation = 2
 width = 28.3463
 height = 19.7654
@@ -156,7 +143,6 @@ depth = 13.9791
 
 [node name="CSGBox2" type="CSGBox" parent="CSGCombiner/CSGBox7"]
 transform = Transform( 1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, 3.0689, 0.668473, 12.1488 )
-visible = false
 operation = 2
 width = 8.60748
 height = 19.7654
@@ -164,7 +150,6 @@ depth = 28.6145
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.901, 5.05642, 0 )
-visible = false
 light_color = Color( 0.988235, 0.631373, 0.0156863, 1 )
 light_energy = 14.26
 light_indirect_energy = 12.44
@@ -173,7 +158,6 @@ omni_attenuation = 8.0
 
 [node name="OmniLight4" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.964, 7.25987, -9.36731 )
-visible = false
 light_color = Color( 0.988235, 0.631373, 0.0156863, 1 )
 light_energy = 14.26
 light_indirect_energy = 12.44
@@ -182,7 +166,6 @@ omni_attenuation = 8.0
 
 [node name="OmniLight2" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.901, 17.2492, 0 )
-visible = false
 light_color = Color( 0.988235, 0.631373, 0.0156863, 1 )
 light_energy = 14.26
 light_indirect_energy = 12.44
@@ -191,7 +174,6 @@ omni_attenuation = 8.0
 
 [node name="OmniLight3" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.8786, 8.49244, 11.387 )
-visible = false
 light_color = Color( 0.0156863, 0.32549, 0.988235, 1 )
 light_energy = 14.26
 light_indirect_energy = 12.44
@@ -200,11 +182,13 @@ omni_attenuation = 8.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -5.77486, 2.76895, 0 )
+visible = false
 
 [node name="Target" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1196, -10.0904, 0 )
 
 [node name="Modle" parent="Target" instance=ExtResource( 3 )]
-transform = Transform( -7.5468e-07, 0, -1.27467, 0, 1.0777, 0, 0.998304, 0, -5.91054e-07, 0, 0, 0 )
+transform = Transform( -7.5468e-07, 0, -1.27467, 0, 1.0777, 0, 0.998304, 0, -5.91054e-07, 0, 13.2394, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Target"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48529, 0 )

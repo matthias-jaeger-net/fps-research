@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="Level" type="Spatial"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+use_collision = true
+width = 100.0
+height = 0.0232798
+depth = 100.0
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37567, 2.04358, -25.9841 )
+use_collision = true
+invert_faces = true
+width = 20.8381
+height = 24.4924
+depth = 0.343089

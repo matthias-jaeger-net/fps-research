@@ -4,27 +4,27 @@ extends KinematicBody
 const MOUSE_SENS_X := -0.01
 const MOUSE_SENS_Y := -0.01
 const MIN_CAM_ANGLE = -85
-const MAX_CAM_ANGLE = 85
+const MAX_CAM_ANGLE = 80
 
 # Moving constants
-const MAX_SPEED = 8
-const MAX_SPEED_SPRINT = 12
+const MAX_SPEED = 12
+const MAX_SPEED_SPRINT = 18
 const ACCELERATION = 4
 const DECCELERATION = 8
 const JUMP_SPEED = 10
 
 # References to nodes 
 onready var head: Spatial = $Head
-onready var raycast: RayCast = $Head/Camera/RayCast
+onready var raycast: RayCast = $Head/Camera/Hand/gun/RayCast
+onready var gun = $Head/Camera/Hand/gun
+onready var anim = $AnimationPlayer
+onready var camera = $Head/Camera
 
-# Settings
 onready var gravity = -ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # Variables
 var velocity: Vector3 = Vector3(0, 0, 0)
 
-
-# Override functions
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -40,7 +40,13 @@ func _unhandled_input(event):
 
 	if Input.is_action_pressed("primary"):
 		handle_shooting()
+		anim.play("fire")
+	else: 
+		anim.stop()
 
+	if Input.is_action_pressed("aim"):
+		anim.play("aim")
+ 
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -49,11 +55,13 @@ func _unhandled_input(event):
 
 func handle_shooting():
 	var collider = raycast.get_collider()
-	print(collider.get_class())
-	if (collider.get_class() == "StaticBody"):
-		print("Hit target")
-		collider.queue_free()
+	print(collider)
+	if (collider != null):
+		if (collider.get_class() == "StaticBody"):
+			print("Hit target")
+			collider.queue_free()
 	
+		
 
 
 func handle_mouse_rotation(event) -> void:
