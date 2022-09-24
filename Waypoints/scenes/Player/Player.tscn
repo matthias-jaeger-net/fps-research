@@ -1,10 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://gun.dae" type="PackedScene" id=2]
-[ext_resource path="res://rifle.dae" type="PackedScene" id=3]
-
-[sub_resource type="CubeMesh" id=1]
 
 [sub_resource type="CapsuleMesh" id=2]
 
@@ -13,79 +9,19 @@
 [sub_resource type="Animation" id=4]
 resource_name = "New Anim"
 length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Head/Camera/Hand/rifle:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -0.2, -0.1 ), Vector3( 0, -0.2, 0.2 ) ]
-}
 
 [sub_resource type="Animation" id=5]
 resource_name = "New Anim (2)"
 
 [sub_resource type="Animation" id=6]
 length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("Head/Camera/Hand/pistol:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.155255, -0.267413, -0.758472 ), Vector3( -0.709, 0.128, -0.758 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Head/Camera/Hand/pistol:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -1.286, 0, 1 ) ]
-}
 
 [sub_resource type="Animation" id=7]
 length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("Head/Camera/Hand/pistol:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.155255, -0.267413, -0.974805 ), Vector3( -0.155255, -0.267413, -0.758472 ), Vector3( -0.155255, -0.267413, -0.758472 ) ]
-}
 
 [sub_resource type="Animation" id=8]
 resource_name = "shoot_rifle"
 length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("Head/Camera/Hand/rifle:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.1, -0.2, -0.3 ), Vector3( -0.1, -0.2, 0.3 ) ]
-}
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -94,6 +30,7 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.357575, 0.0826135, -0.290035 )
 
 [node name="RayCast" type="RayCast" parent="Head/Camera"]
 transform = Transform( 1, 0, 0, -1.86265e-08, 0.999749, 0.022443, -1.74623e-10, -0.022443, 0.999748, 0.544745, -0.57013, -1.85847 )
@@ -102,20 +39,6 @@ cast_to = Vector3( 0, 0, -10000 )
 
 [node name="Hand" type="Spatial" parent="Head/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.302717, -1.1 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Head/Camera/Hand"]
-transform = Transform( 0.1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0 )
-visible = false
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="rifle" parent="Head/Camera/Hand" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.2, -0.3 )
-visible = false
-
-[node name="pistol" parent="Head/Camera/Hand" instance=ExtResource( 2 )]
-transform = Transform( 0.999848, -0.0174524, 0, 0.017448, 0.999596, 0.022443, -0.000391685, -0.0224396, 0.999748, -0.155255, -0.267413, -0.974805 )
-visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0 )
