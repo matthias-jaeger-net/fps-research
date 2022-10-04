@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="CurrentGame"
-run/main_scene="res://World.tscn"
+run/main_scene="res://test-cgbox.tscn"
 config/icon="res://icon.png"
 
 [global]

@@ -3,10 +3,10 @@ extends KinematicBody
 export var SENSITITVIY: float = 0.05
 export var ACCELERATION: float = 4
 export var DECCELERATION: float = 8
-export var JUMP_SPEED: float = 10
-export var MAX_SPEED: float = 12
-export var MAX_SPEED_SPRINT: float = 18
-export var GRAVITY: float = -10
+export var JUMP_SPEED: float = 12
+export var MAX_SPEED: float = 10
+export var MAX_SPEED_SPRINT: float = 14
+export var GRAVITY: float = -12
 export var velocity: Vector3 = Vector3(0, 0, 0)
 
 export var ADS_LERP: float = 20
@@ -38,16 +38,18 @@ onready var targets: Spatial = get_node(targets_path)
 const pistol_sound_path = "res://9mm-pistol-shoot-short-reverb-7152.mp3"
 var pistol_sound = preload(pistol_sound_path)
 
+var has_weapon_drawn
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	audio_player.stream = pistol_sound
-	pistol.visible = false
-
+	has_weapon_drawn = false
 
 func _process(delta: float):
 	weapon_camera.global_transform = camera.global_transform	
 	handle_aim_down_sights(delta)
+	handle_weapon_drawn()
 
 
 func _physics_process(delta: float):
@@ -59,7 +61,8 @@ func _input(event: InputEvent):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if Input.is_action_pressed("ui_accept"):
-		pistol.visible = true
+		has_weapon_drawn = true
+		handle_weapon_drawn()
 	
 	if Input.is_action_pressed("primary"):
 		handle_shooting()
@@ -68,6 +71,8 @@ func _input(event: InputEvent):
 func _unhandled_input(event):
 	handle_view(event)
 
+func handle_weapon_drawn():
+	pistol.visible = false
 
 func handle_aim_down_sights(delta: float):
 	if Input.is_action_pressed("secondary"):
@@ -102,10 +107,11 @@ func handle_shooting():
 		if (collider.get_parent().name == "Targets"):
 			collider.queue_free()
 			animation_player.stop()
-
-	var children = targets.get_children()
-	if (children == []):
-		print("Mission accomplished")
+	
+	if (targets):
+		var children = targets.get_children()
+		if (children == []):
+			print("Mission accomplished")
 
 
 func handle_movement(delta: float):

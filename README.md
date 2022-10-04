@@ -2,7 +2,7 @@
 Research for a FPS game with the godot game engine
 
 # Game
-- [ ] Startscreen only
+- [ ] Startscreen
 - [ ] Playing state
 - [ ] Settings / Pause
 

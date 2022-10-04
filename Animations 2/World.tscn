@@ -1,199 +1,91 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Modles/Pistol/Pistol.obj" type="ArrayMesh" id=2]
-[ext_resource path="res://9mm-pistol-shoot-short-reverb-7152.mp3" type="AudioStream" id=3]
-[ext_resource path="res://Frame 2.png" type="Texture" id=4]
 [ext_resource path="res://Modles/Ducks/duck-base-joined.dae" type="PackedScene" id=5]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CapsuleShape" id=1]
+[sub_resource type="SphereMesh" id=1]
 
-[sub_resource type="CapsuleMesh" id=2]
-
-[sub_resource type="Animation" id=3]
-resource_name = "fire"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Head/Hand/Pistol:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0.3 ), Vector3( 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Head/Hand/Pistol:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 3, 0, 0 ), Vector3( 0, 0, 0 ) ]
-}
-
-[sub_resource type="SphereMesh" id=4]
-
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.831373, 0.529412, 0.529412, 1 )
 
-[sub_resource type="SphereShape" id=6]
+[sub_resource type="SphereShape" id=3]
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.709064, 0.960127, 0.521748 )
 
 [node name="World" type="Spatial"]
 
-[node name="Player" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46972, 0 )
-script = ExtResource( 1 )
-default_position = Vector3( 1, -0.445, -2 )
-ads_position = Vector3( 0, -0.3, -2 )
-head_path = NodePath("Head")
-camera_path = NodePath("Head/Camera")
-weapon_camera_path = NodePath("Head/Camera/ViewportContainer/Viewport/Camera")
-raycast_path = NodePath("Head/RayCast")
-hand_path = NodePath("Head/Hand")
-animation_path = NodePath("AnimationPlayer")
-audio_path = NodePath("AudioStreamPlayer3D")
-targets_path = NodePath("../Targets")
-pistol_path = NodePath("Head/Hand/Pistol")
-
-[node name="CollisionShape" type="CollisionShape" parent="Player"]
-transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.775, 0, 0.5, -3.38763e-08, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="Head" type="Spatial" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.755, 0 )
-
-[node name="RayCast" type="RayCast" parent="Player/Head"]
-transform = Transform( 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-enabled = true
-cast_to = Vector3( 0, 0, -1000 )
-
-[node name="Hand" type="Spatial" parent="Player/Head"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99, -0.445, -2 )
-
-[node name="Pistol" type="MeshInstance" parent="Player/Head/Hand"]
-transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0 )
-layers = 2
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-material/2 = null
-
-[node name="Camera" type="Camera" parent="Player/Head"]
-cull_mask = 1
-
-[node name="ViewportContainer" type="ViewportContainer" parent="Player/Head/Camera"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Viewport" type="Viewport" parent="Player/Head/Camera/ViewportContainer"]
-size = Vector2( 1024, 600 )
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="Camera" type="Camera" parent="Player/Head/Camera/ViewportContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11342, 0 )
-cull_mask = 2
-
-[node name="TextureRect" type="TextureRect" parent="Player/Head/Camera/ViewportContainer/Viewport"]
-visible = false
-margin_left = 512.0
-margin_top = 300.0
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 4
-
-[node name="MeshInstance" type="MeshInstance" parent="Player"]
-transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.75, 0, 0.5, -3.27835e-08, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-anims/fire = SubResource( 3 )
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Player"]
-stream = ExtResource( 3 )
+[node name="Player" parent="." instance=ExtResource( 6 )]
 
 [node name="Targets" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1004, 3.2299, -17.2818 )
+visible = false
 
 [node name="Target" type="StaticBody" parent="Targets"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.19401, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Targets/Target"]
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Targets/Target"]
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Target4" type="StaticBody" parent="Targets"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35.9329, 20.9742, 22.309 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Targets/Target4"]
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Targets/Target4"]
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Target5" type="StaticBody" parent="Targets"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.81422, 41.2045, 22.309 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Targets/Target5"]
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Targets/Target5"]
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Target2" type="StaticBody" parent="Targets"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.1075, 5.19401, -18.9151 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Targets/Target2"]
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Targets/Target2"]
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Target3" type="StaticBody" parent="Targets"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.1075, 5.19401, -44.4413 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Targets/Target3"]
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Targets/Target3"]
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Target6" type="StaticBody" parent="Targets"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.1075, 40.705, -42.9834 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Targets/Target6"]
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Targets/Target6"]
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="Architecture" type="CSGCombiner" parent="."]
+visible = false
 use_collision = true
 
 [node name="CSGBox2" type="CSGBox" parent="Architecture"]
@@ -356,16 +248,18 @@ depth = 37.4217
 
 [node name="Duck" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1004, 3.2299, -17.2818 )
+visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Duck"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -22.1004, 0.548979, 4.54735 )
-shape = SubResource( 7 )
+shape = SubResource( 4 )
 
 [node name="duck-base-joined" parent="Duck" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.1004, -3.2299, 4.54735 )
 
 [node name="Items" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.623, 41.7217, 20.3778 )
+visible = false
 
 [node name="Pistol" type="MeshInstance" parent="Items"]
 mesh = ExtResource( 2 )
